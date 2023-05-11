@@ -1,3 +1,5 @@
+package main;
+
 import java.awt.*;
 
 public class Ball {
@@ -20,4 +22,6 @@ public class Ball {
     public int getD(){
         return diameter;
     }
+
+
 }

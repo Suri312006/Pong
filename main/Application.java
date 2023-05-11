@@ -1,4 +1,4 @@
-
+package main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,13 +13,15 @@ public class Application extends JFrame {
     private void initUI() {
 
         add(new Board());
-        setSize(250, 250);
-        Ball lmao = new Ball(5,5, 15);
+        setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
+        Ball lmao = new Ball(5,5, 50);
 
 
         setTitle("do the rump shaker dude");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setBackground(Color.BLACK);
         setLocationRelativeTo(null);
     }
 
