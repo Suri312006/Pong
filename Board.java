@@ -1,12 +1,11 @@
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import javax.swing.JPanel;
+import java.awt.*;
 
-public class Board extends JPanel {
-
+public class Board extends Panel {
+    Ball ball;
     public Board() {
         initBoard();
+        ball = new Ball(0,0,30);
     }
 
     private void initBoard() {
@@ -15,7 +14,11 @@ public class Board extends JPanel {
 
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paint(Graphics g) {
+        Graphics2D gg = (Graphics2D) g;
+        gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gg.setColor(Color.BLUE);
+        gg.fillOval(ball.getxpos(), ball.getypos(), ball.getD(), ball.getD());
 
     }
 }
