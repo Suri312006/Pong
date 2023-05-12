@@ -5,12 +5,16 @@ import java.awt.*;
 public class Ball {
     int xpos;
     int ypos;
+    double xspeed;
+    int yspeed;
 
     int diameter;
     public Ball(int xpos, int ypos, int diameter){
         this.xpos = xpos;
         this.ypos = ypos;
         this.diameter = diameter;
+        this.xspeed =1;
+        this.yspeed=0;
     }
 
     public int getxpos(){
@@ -23,5 +27,10 @@ public class Ball {
         return diameter;
     }
 
+public void moveBall(){
+        xpos  += xspeed;
+
+    }
 
 }
+

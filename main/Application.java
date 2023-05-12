@@ -14,7 +14,7 @@ public class Application extends JFrame {
 
         add(new Board());
         setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
-        Ball lmao = new Ball(5,5, 50);
+
 
 
         setTitle("do the rump shaker dude");
