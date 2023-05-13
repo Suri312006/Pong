@@ -314,6 +314,7 @@ public class SmoothMoves extends JComponent implements ActionListener, KeyListen
         } else if (keyCode == KeyEvent.VK_A) {
             // A: Antialiasing - Displays soft edges around graphics
             useAA = !useAA;
+            System.out.print("lol ");
             createAnimationImage();
         } else if (keyCode == KeyEvent.VK_C) {
             // C: Color - Toggles rectangle color between dark and light colors

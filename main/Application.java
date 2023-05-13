@@ -13,7 +13,7 @@ public class Application {
         Board component = new Board();
         f.add(component);
         f.setVisible(true);
-        //f.addKeyListener(component);
+        f.addKeyListener(component);
     }
 
     public static void main(String[] args) {
