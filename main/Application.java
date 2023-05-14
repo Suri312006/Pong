@@ -1,35 +1,27 @@
 package main;
 
+import test.SmoothMoves;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Application extends JFrame {
-
-    public Application() {
-
-        initUI();
-    }
-
-    private void initUI() {
-
-        add(new Board());
-        setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
-
-
-
-        setTitle("do the rump shaker dude");
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        setBackground(Color.BLACK);
-        setLocationRelativeTo(null);
+public class Application {
+    private static void createAndShowGUI() {
+        JFrame f = new JFrame("Smooth Moves");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
+        Board component = new Board();
+        f.add(component);
+        f.setVisible(true);
+        f.addKeyListener(component);
     }
 
     public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-            Application ex = new Application();
-            ex.setVisible(true);
-        });
+        Runnable doCreateAndShowGUI = new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        };
+        SwingUtilities.invokeLater(doCreateAndShowGUI);
     }
 }

@@ -13,7 +13,7 @@ public class Ball {
         this.xpos = xpos;
         this.ypos = ypos;
         this.diameter = diameter;
-        this.xspeed =1;
+        this.xspeed =10;
         this.yspeed=0;
     }
 
