@@ -11,7 +11,10 @@ public class Application {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
         Board component = new Board();
+        paddle2 comp2 = new paddle2();
+        f.add(comp2);
         f.add(component);
+
         f.setVisible(true);
         f.addKeyListener(component);
     }

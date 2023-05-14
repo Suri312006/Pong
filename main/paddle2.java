@@ -1,35 +1,26 @@
 package main;
 
+
 import main.Ball;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
-public class Board extends JComponent implements ActionListener, KeyListener {
-    Ball ball;
-    Paddle p1;
+public class paddle2 extends JComponent implements ActionListener, KeyListener {
+
     Paddle p2;
-
-    private final Set<Integer> pressedKeys = new HashSet<>();
 
     final static int CYCLE_TIME = 2000;
 
     long cycleStart;
     Timer timer = null; // animation Timer
     int currentResolution = 50; // current Timer resolution
-    public Board() {
-
+    public paddle2() {
         cycleStart = System.nanoTime() / 1000000;
         startTimer(currentResolution);
-
         initBoard();
-        ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15,30);
         repaint();
-        p1 = new Paddle(80, 350, 10, 100);
         p2 = new Paddle(800, 350, 10, 100);
 
     }
@@ -45,7 +36,7 @@ public class Board extends JComponent implements ActionListener, KeyListener {
     }
 
     private void initBoard() {
-        setPreferredSize(new Dimension(300, 300));
+        setPreferredSize(new Dimension(3, 0));
 
     }
 
@@ -55,23 +46,12 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         Graphics2D gg = (Graphics2D) g;
         gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        gg.setColor(Color.BLACK);
-        g.fillRect(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
-
         gg.setColor(Color.WHITE);
         //Paddle 1
-        gg.fillRect(p1.getXpos(), p1.getYpos(), p1.getWidth(), p1.getHeight());
+
         //Paddle 2
         gg.fillRect(p2.getXpos(), p2.getYpos(), p2.getWidth(), p2.getHeight());
         //Ball
-        gg.fillOval(ball.getxpos(), ball.getypos(), ball.getD(), ball.getD());
-
-        if(ball.getxpos() == p1.getXpos()){
-            ball.xspeed *= -1;
-        }
-        if(ball.getxpos() == p2.getXpos()){
-            ball.xspeed *= -1;
-        }
     }
 
     @Override
@@ -88,39 +68,41 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         fraction = 1 - Math.abs(1 - (2 * fraction));
         //animate(fraction);
     }
-    @Override
-    public synchronized void keyPressed(KeyEvent e) {
-        pressedKeys.add(e.getKeyCode());
-        Point offset = new Point();
-        if (!pressedKeys.isEmpty()) {
-            for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext();) {
-                switch (it.next()) {
-                    case KeyEvent.VK_W:
-                        p1.move(-1);
-                        repaint();
-                    case KeyEvent.VK_UP:
-                        p2.move(-1);
-                        repaint();
-                        break;
 
-                    case KeyEvent.VK_S:
-                        p1.move(1);
-                        repaint();
-                    case KeyEvent.VK_DOWN:
-                        p2.move(1);
-                        repaint();
-                        break;
-                }
-            }
+    public synchronized void keyPressed(KeyEvent e) {
+
+        int keyCode = e.getKeyCode();
+//        if(keyCode == KeyEvent.VK_W){
+//            p1.move(-1);
+//            repaint();
+//
+//        }
+//        if(keyCode == KeyEvent.VK_S){
+//            p1.move(1);
+//            repaint();
+//
+//        }
+
+        if(keyCode == KeyEvent.VK_UP){
+            p2.move(-1);
+            repaint();
+
         }
-        System.out.println(offset); // Do something with the offset.
+        if(keyCode == KeyEvent.VK_DOWN){
+            p2.move(1);
+            repaint();
+
+        }
+
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
-        pressedKeys.remove(e.getKeyCode());
+
     }
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 }
+
