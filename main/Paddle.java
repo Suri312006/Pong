@@ -6,6 +6,8 @@ public class Paddle {
     int height;
     int width;
 
+    static int moveSpeed = 3;
+
     public Paddle(int xpos, int ypos, int width, int height) {
         this.xpos = xpos;
         this.ypos = ypos;
@@ -23,5 +25,9 @@ public class Paddle {
     }
     public int getWidth(){
         return width;
+    }
+
+    public void move(double scale){
+        this.ypos += moveSpeed*scale;
     }
 }

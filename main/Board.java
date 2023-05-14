@@ -24,8 +24,8 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         initBoard();
         ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15,30);
         repaint();
-        p1 = new Paddle(800, 350, 10, 100);
-        p2 = new Paddle(80, 350, 10, 100);
+        p1 = new Paddle(80, 350, 10, 100);
+        p2 = new Paddle(800, 350, 10, 100);
 
     }
 
@@ -54,11 +54,12 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         g.fillRect(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
 
         gg.setColor(Color.WHITE);
+        //Paddle 1
         gg.fillRect(p1.getXpos(), p1.getYpos(), p1.getWidth(), p1.getHeight());
-        gg.fillRect(p2.getXpos(), p1.getYpos(), p1.getWidth(), p1.getHeight());
+        //Paddle 2
+        gg.fillRect(p2.getXpos(), p2.getYpos(), p2.getWidth(), p2.getHeight());
+       //Ball
         gg.fillOval(ball.getxpos(), ball.getypos(), ball.getD(), ball.getD());
-        ball.moveBall();
-
 
         if(ball.getxpos() == p1.getXpos()){
                 ball.xspeed *= -1;
@@ -84,11 +85,28 @@ public class Board extends JComponent implements ActionListener, KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
+
         int keyCode = e.getKeyCode();
-        if(keyCode == KeyEvent.VK_A){
-            ball.moveBall();
+        if(keyCode == KeyEvent.VK_W){
+            p1.move(-1);
             repaint();
-            System.out.println(ball.getxpos());
+
+        }
+        if(keyCode == KeyEvent.VK_S){
+            p1.move(1);
+            repaint();
+
+        }
+
+        if(keyCode == KeyEvent.VK_UP){
+            p2.move(-1);
+            repaint();
+
+        }
+        if(keyCode == KeyEvent.VK_DOWN){
+            p2.move(1);
+            repaint();
+
         }
 
     }
