@@ -98,6 +98,7 @@ public class Board extends JComponent implements ActionListener, KeyListener {
                     case KeyEvent.VK_W:
                         p1.move(-1);
                         repaint();
+                        break;
                     case KeyEvent.VK_UP:
                         p2.move(-1);
                         repaint();
@@ -106,6 +107,7 @@ public class Board extends JComponent implements ActionListener, KeyListener {
                     case KeyEvent.VK_S:
                         p1.move(1);
                         repaint();
+                        break;
                     case KeyEvent.VK_DOWN:
                         p2.move(1);
                         repaint();
