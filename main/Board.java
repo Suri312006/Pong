@@ -13,35 +13,22 @@ public class Board extends JComponent implements ActionListener, KeyListener {
     Ball ball;
     BoundBox p1;
     BoundBox p2;
-
     BoundBox background;
-
     private final Set<Integer> pressedKeys = new HashSet<>();
-
     private final static int UPDATE_RATE = 60;
 
-
-    long cycleStart;
-    Timer timer = null; // animation Timer
-    int currentResolution = 50; // current Timer resolution
     public Board() {
 
-        initBoard();
-
         ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15);
-        repaint();
         p1 = new BoundBox(80, 350, 10, 100);
         p2 = new BoundBox(800, 350, 10, 100);
         background = new BoundBox(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
 
+        repaint();
         gameStart();
 
     }
 
-    private void initBoard() {
-        setPreferredSize(new Dimension(300, 300));
-
-    }
 
     public void gameStart() {
         // Run the game logic in its own thread.
@@ -59,11 +46,11 @@ public class Board extends JComponent implements ActionListener, KeyListener {
                 }
             }
         };
-        gameThread.start();  // Invoke GaemThread.run()
+        gameThread.start();  // Invoke GameThread.run()
     }
 
     public void gameUpdate() {
-        ball.moveOneStepWithCollisionDetection(background);
+        ball.BackgroundCollisionDetection(background);
     }
 
     @Override

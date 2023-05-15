@@ -32,7 +32,7 @@ public class Ball {
         this(x, y, radius, speed, angleInDegree, DEFAULT_COLOR);
     }
     public Ball(float x, float y) {
-        this(x, y, 15, 10,27, DEFAULT_COLOR);
+        this(x, y, 15, 2,270, DEFAULT_COLOR);
     }
 
     /** Draw itself using the given graphics context. */
@@ -46,12 +46,12 @@ public class Ball {
      *
      * @param box: the container (obstacle) for this ball.
      */
-    public void moveOneStepWithCollisionDetection(BoundBox box) {
+    public void BackgroundCollisionDetection(BoundBox box) {
         // Get the ball's bounds, offset by the radius of the ball
         float ballMinX = box.minX + radius;
         float ballMinY = box.minY + radius;
         float ballMaxX = box.maxX - radius;
-        float ballMaxY = box.maxY - radius;
+        float ballMaxY = box.maxY - 3*radius;
 
         // Calculate the ball's new position
         x += speedX;
@@ -73,37 +73,17 @@ public class Ball {
             y = ballMaxY;
         }
     }
+    //TODO need a collision detection for paddles
 
-    /** Return the magnitude of speed. */
+    //Return the magnitude of speed
     public float getSpeed() {
         return (float)Math.sqrt(speedX * speedX + speedY * speedY);
     }
 
-    /** Return the direction of movement in degrees (counter-clockwise). */
+    //Return the direction of movement in degrees (counter-clockwise)
     public float getMoveAngle() {
         return (float)Math.toDegrees(Math.atan2(-speedY, speedX));
     }
 
-    /** Return mass */
-    public float getMass() {
-        return radius * radius * radius / 1000f;  // Normalize by a factor
-    }
 
-    /** Return the kinetic energy (0.5mv^2) */
-    public float getKineticEnergy() {
-        return 0.5f * getMass() * (speedX * speedX + speedY * speedY);
-    }
-
-    /** Describe itself. */
-    public String toString() {
-        sb.delete(0, sb.length());
-        formatter.format("@(%3.0f,%3.0f) r=%3.0f V=(%2.0f,%2.0f) " +
-                        "S=%4.1f \u0398=%4.0f KE=%3.0f",
-                x, y, radius, speedX, speedY, getSpeed(), getMoveAngle(),
-                getKineticEnergy());  // \u0398 is theta
-        return sb.toString();
-    }
-    // Re-use to build the formatted string for toString()
-    private StringBuilder sb = new StringBuilder();
-    private Formatter formatter = new Formatter(sb);
 }
