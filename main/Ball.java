@@ -1,7 +1,5 @@
 package main;
 
-import main.ContainerBox;
-
 import java.awt.*;
 import java.util.Formatter;
 /**
@@ -12,7 +10,7 @@ public class Ball {
     float speedX, speedY; // Ball's speed per step in x and y (package access)
     float radius;         // Ball's radius (package access)
     private Color color;  // Ball's color
-    private static final Color DEFAULT_COLOR = Color.BLUE;
+    private static final Color DEFAULT_COLOR = Color.WHITE;
 
     /**
      * Constructor: For user friendliness, user specifies velocity in speed and
@@ -33,6 +31,9 @@ public class Ball {
     public Ball(float x, float y, float radius, float speed, float angleInDegree) {
         this(x, y, radius, speed, angleInDegree, DEFAULT_COLOR);
     }
+    public Ball(float x, float y) {
+        this(x, y, 15, 10,27, DEFAULT_COLOR);
+    }
 
     /** Draw itself using the given graphics context. */
     public void draw(Graphics g) {
@@ -45,7 +46,7 @@ public class Ball {
      *
      * @param box: the container (obstacle) for this ball.
      */
-    public void moveOneStepWithCollisionDetection(ContainerBox box) {
+    public void moveOneStepWithCollisionDetection(BoundBox box) {
         // Get the ball's bounds, offset by the radius of the ball
         float ballMinX = box.minX + radius;
         float ballMinY = box.minY + radius;

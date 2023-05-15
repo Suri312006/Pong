@@ -269,7 +269,7 @@ public class SmoothMoves extends JComponent implements ActionListener, KeyListen
         // The opacity, used by the fading animation, will just use the
         // animation fraction directly
         opacity = animationFactor;
-        // The move animation will calculate a location based on a linear
+// The move animation will calculate a location~ based on a linear
         // interpolation between its start and end points using the fraction
         moveX = moveMinX + (int) (.5f + animationFactor * (float) (moveMaxX - moveMinX));
         // redisplay our component with the new animated values

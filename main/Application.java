@@ -12,7 +12,6 @@ public class Application {
         f.setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
         Board component = new Board();
         f.add(component);
-
         f.setVisible(true);
         f.addKeyListener(component);
 

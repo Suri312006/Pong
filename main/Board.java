@@ -11,37 +11,31 @@ import java.util.Set;
 
 public class Board extends JComponent implements ActionListener, KeyListener {
     Ball ball;
-    Paddle p1;
-    Paddle p2;
+    BoundBox p1;
+    BoundBox p2;
+
+    BoundBox background;
 
     private final Set<Integer> pressedKeys = new HashSet<>();
 
-    final static int CYCLE_TIME = 2000;
+    private final static int UPDATE_RATE = 60;
+
 
     long cycleStart;
     Timer timer = null; // animation Timer
     int currentResolution = 50; // current Timer resolution
     public Board() {
 
-        cycleStart = System.nanoTime() / 1000000;
-        startTimer(currentResolution);
-
         initBoard();
-        ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15,30);
+
+        ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15);
         repaint();
-        p1 = new Paddle(80, 350, 10, 100);
-        p2 = new Paddle(800, 350, 10, 100);
+        p1 = new BoundBox(80, 350, 10, 100);
+        p2 = new BoundBox(800, 350, 10, 100);
+        background = new BoundBox(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
 
-    }
+        gameStart();
 
-    private void startTimer(int resolution) {
-        if (timer != null) {
-            timer.stop();
-            timer.setDelay(resolution);
-        } else {
-            timer = new Timer(resolution, this);
-        }
-        timer.start();
     }
 
     private void initBoard() {
@@ -49,6 +43,28 @@ public class Board extends JComponent implements ActionListener, KeyListener {
 
     }
 
+    public void gameStart() {
+        // Run the game logic in its own thread.
+        Thread gameThread = new Thread() {
+            public void run() {
+                while (true) {
+                    // Execute one time-step for the game
+                    gameUpdate();
+                    // Refresh the display
+                    repaint();
+                    // Delay and give other thread a chance
+                    try {
+                        Thread.sleep(1000 / UPDATE_RATE);
+                    } catch (InterruptedException ex) {}
+                }
+            }
+        };
+        gameThread.start();  // Invoke GaemThread.run()
+    }
+
+    public void gameUpdate() {
+        ball.moveOneStepWithCollisionDetection(background);
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -56,42 +72,16 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         gg.setColor(Color.BLACK);
-        g.fillRect(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
+        gg.fillRect(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
 
-        gg.setColor(Color.WHITE);
         //Paddle 1
-        gg.fillRect(p1.getXpos(), p1.getYpos(), p1.getWidth(), p1.getHeight());
+        p1.draw(g);
         //Paddle 2
-        gg.fillRect(p2.getXpos(), p2.getYpos(), p2.getWidth(), p2.getHeight());
-        //Ball
-        gg.fillOval(ball.getxpos(), ball.getypos(), ball.getD(), ball.getD());
-
-        physicsCheck();
+        p2.draw(g);
+        //ball
+        ball.draw(g);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // calculate the fraction elapsed of the animation and call animate()
-        // to alter the values accordingly
-        long currentTime = System.nanoTime() / 1000000;
-        long totalTime = currentTime - cycleStart;
-        if (totalTime > CYCLE_TIME) {
-            cycleStart = currentTime;
-        }
-        float fraction = (float) totalTime / CYCLE_TIME;
-        fraction = Math.min(1.0f, fraction);
-        fraction = 1 - Math.abs(1 - (2 * fraction));
-        //animate(fraction);
-    }
-
-    public void physicsCheck(){
-        if(ball.getxpos() == (p1.getXpos()+p1.getWidth())){
-            ball.xspeed *= -1;
-        }
-        if(ball.getxpos() == p2.getXpos()){
-            ball.xspeed *= -1;
-        }
-    }
 
     @Override
     public synchronized void keyPressed(KeyEvent e) {
@@ -124,6 +114,10 @@ public class Board extends JComponent implements ActionListener, KeyListener {
     }
     @Override
     public void keyTyped(KeyEvent e) {
+
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }
