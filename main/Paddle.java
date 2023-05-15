@@ -6,6 +6,8 @@ public class Paddle {
     int height;
     int width;
 
+    ContainerBox lol;
+
     static int moveSpeed = 3;
 
     public Paddle(int xpos, int ypos, int width, int height) {

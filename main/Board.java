@@ -66,12 +66,7 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         //Ball
         gg.fillOval(ball.getxpos(), ball.getypos(), ball.getD(), ball.getD());
 
-        if(ball.getxpos() == p1.getXpos()){
-            ball.xspeed *= -1;
-        }
-        if(ball.getxpos() == p2.getXpos()){
-            ball.xspeed *= -1;
-        }
+        physicsCheck();
     }
 
     @Override
@@ -88,34 +83,40 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         fraction = 1 - Math.abs(1 - (2 * fraction));
         //animate(fraction);
     }
+
+    public void physicsCheck(){
+        if(ball.getxpos() == (p1.getXpos()+p1.getWidth())){
+            ball.xspeed *= -1;
+        }
+        if(ball.getxpos() == p2.getXpos()){
+            ball.xspeed *= -1;
+        }
+    }
+
     @Override
     public synchronized void keyPressed(KeyEvent e) {
         pressedKeys.add(e.getKeyCode());
         Point offset = new Point();
-        if (!pressedKeys.isEmpty()) {
-            for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext();) {
-                switch (it.next()) {
-                    case KeyEvent.VK_W:
-                        p1.move(-1);
-                        repaint();
-                        break;
-                    case KeyEvent.VK_UP:
-                        p2.move(-1);
-                        repaint();
-                        break;
-
-                    case KeyEvent.VK_S:
-                        p1.move(1);
-                        repaint();
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        p2.move(1);
-                        repaint();
-                        break;
-                }
+        for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext(); ) {
+            switch (it.next()) {
+                case KeyEvent.VK_W:
+                    p1.move(-1);
+                    repaint();
+                    break;
+                case KeyEvent.VK_UP:
+                    p2.move(-1);
+                    repaint();
+                    break;
+                case KeyEvent.VK_S:
+                    p1.move(1);
+                    repaint();
+                    break;
+                case KeyEvent.VK_DOWN:
+                    p2.move(1);
+                    repaint();
+                    break;
             }
         }
-        System.out.println(offset); // Do something with the offset.
     }
     @Override
     public void keyReleased(KeyEvent e) {

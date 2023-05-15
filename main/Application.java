@@ -11,12 +11,14 @@ public class Application {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
         Board component = new Board();
-        paddle2 comp2 = new paddle2();
-        f.add(comp2);
         f.add(component);
 
         f.setVisible(true);
         f.addKeyListener(component);
+
+
+        //https://www3.ntu.edu.sg/home/ehchua/programming/java/J8a_GameIntro-BouncingBalls.html
+        //useful website for physics
     }
 
     public static void main(String[] args) {
