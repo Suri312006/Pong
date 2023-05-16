@@ -9,7 +9,7 @@ public class BoundBox {
     private Color colorFilled;   // Box's filled color (background)
     private static final Color DEFAULT_COLOR_FILLED = Color.WHITE;
 
-    private static int yspeed = 10;
+    private static int yspeed = 20;
 
     /** Constructors */
     public BoundBox(int x, int y, int width, int height, Color colorFilled) {
@@ -44,4 +44,5 @@ public class BoundBox {
         this.minY += increment*yspeed;
         this.maxY += increment*yspeed;
     }
+
 }

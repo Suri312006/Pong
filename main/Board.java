@@ -9,11 +9,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Board extends JComponent implements ActionListener, KeyListener {
+public class Board extends JPanel implements ActionListener, KeyListener {
     Ball ball;
     BoundBox p1;
     BoundBox p2;
     BoundBox background;
+
+    private Drawer artist;
     private final Set<Integer> pressedKeys = new HashSet<>();
     private final static int UPDATE_RATE = 60;
 
@@ -22,7 +24,12 @@ public class Board extends JComponent implements ActionListener, KeyListener {
         ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15);
         p1 = new BoundBox(80, 350, 10, 100);
         p2 = new BoundBox(800, 350, 10, 100);
-        background = new BoundBox(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
+        background = new BoundBox(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT, Color.BLACK);
+
+        artist = new Drawer();
+        this.setLayout(new BorderLayout());
+        this.add(artist, BorderLayout.CENTER);
+
 
         repaint();
         gameStart();
@@ -51,23 +58,11 @@ public class Board extends JComponent implements ActionListener, KeyListener {
 
     public void gameUpdate() {
         ball.BackgroundCollisionDetection(background);
+        ball.PaddleCollisionDetection(p1);
+        ball.PaddleCollisionDetection(p2);
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        Graphics2D gg = (Graphics2D) g;
-        gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        gg.setColor(Color.BLACK);
-        gg.fillRect(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
-
-        //Paddle 1
-        p1.draw(g);
-        //Paddle 2
-        p2.draw(g);
-        //ball
-        ball.draw(g);
-    }
 
 
     @Override
@@ -107,4 +102,25 @@ public class Board extends JComponent implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
 
     }
+    public class Drawer extends JPanel {
+        @Override
+        public void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D)g;
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//            super.paintComponent(g);    // Paint background
+            // Draw the box and the ball
+            background.draw(g2d);
+            p1.draw(g2d);
+            p2.draw(g2d);
+            ball.draw(g2d);
+        }
+
+        /** Called back to get the preferred size of the component. */
+        @Override
+        public Dimension getPreferredSize() {
+            return (new Dimension(CONSTANTS.WIDTH, CONSTANTS.HEIGHT));
+        }
+    }
+
+
 }

@@ -46,7 +46,39 @@
 //
 //        // Init the custom drawing panel for drawing the game
 //        canvas = new DrawCanvas();
-//        this.setLayout(new BorderLayout());
+//        this.setLayout(new BorderLayout());public class Drawer extends JPanel {
+//    @Override
+//    public void paintComponent(Graphics g) {
+//        super.paintComponent(g);    // Paint background
+//        // Draw the box and the ball
+//        box.draw(g);
+//        ball.draw(g);
+//        // Display ball's information
+//        g.setColor(Color.WHITE);
+//        g.setFont(new Font("Courier New", Font.PLAIN, 12));
+//        g.drawString("Ball " + ball.toString(), 20, 30);
+//    }
+//
+//    /** Called back to get the preferred size of the component. */
+//    @Override
+//    public Dimension getPreferredSize() {
+//        return (new Dimension(canvasWidth, canvasHeight));
+//    }
+//}@Override
+//    public void paintComponent(Graphics g) {
+//        Graphics2D gg = (Graphics2D) g;
+//        gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//
+//        gg.setColor(Color.BLACK);
+//        gg.fillRect(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
+//
+//        //Paddle 1
+//        p1.draw(gg);
+//        //Paddle 2
+//        p2.draw(gg);
+//        //ball
+//        ball.draw(gg);
+//    }
 //        this.add(canvas, BorderLayout.CENTER);
 //
 //        // Handling window resize.
@@ -61,7 +93,7 @@
 //                box.set(0, 0, canvasWidth, canvasHeight);
 //            }
 //        });
-//
+
 //        // Start the ball bouncing
 //        gameStart();
 //    }

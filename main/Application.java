@@ -7,13 +7,13 @@ import java.awt.*;
 
 public class Application {
     private static void createAndShowGUI() {
-        JFrame f = new JFrame("Smooth Moves");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
-        Board component = new Board();
-        f.add(component);
-        f.setVisible(true);
-        f.addKeyListener(component);
+        JFrame frame = new JFrame("A World of Balls");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Board lmao = new Board();
+        frame.setContentPane(lmao); // BallWorld is a JPanel
+        frame.pack();            // Preferred size of BallWorld
+        frame.setVisible(true);  // Show it
+        frame.addKeyListener(lmao);
 
 
         //https://www3.ntu.edu.sg/home/ehchua/programming/java/J8a_GameIntro-BouncingBalls.html
