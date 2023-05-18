@@ -88,7 +88,7 @@ public class Ball {
         if (paddleNum == 1) {
             if ((ballMinX < boxMaxX)&& (ballMinY > boxMinY) && (ballMinY < boxMaxY)) {
                 speedX = -speedX;
-                speedY = -speedY;// Reflect along normal
+                speedY = speedY;// Reflect along normal
                 // Re-position the ball at the edge
             }
         }
@@ -98,6 +98,7 @@ public class Ball {
                 speedY = -speedY;// Reflect along normal
                 // Re-position the ball at the edge
             }
+
         }
 
     }
