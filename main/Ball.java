@@ -32,7 +32,7 @@ public class Ball {
         this(x, y, radius, speed, angleInDegree, DEFAULT_COLOR);
     }
     public Ball(float x, float y) {
-        this(x, y, 15, 10, 180, DEFAULT_COLOR);
+        this(x, y, 15, 5, 10, DEFAULT_COLOR);
     }
 
     /** Draw itself using the given graphics context. */
@@ -73,18 +73,33 @@ public class Ball {
             y = ballMaxY;
         }
     }
-    public void PaddleCollisionDetection(BoundBox box) {
+    public void PaddleCollisionDetection(BoundBox box, int paddleNum) {
         // Get the box's bounds, offset by the radius of the ball
         float boxMinX = box.minX + radius;
         float boxMinY = box.minY + radius;
         float boxMaxX = box.maxX - radius;
         float boxMaxY = box.maxY - radius;
+
+        float ballMinX = x - 2*radius;
+        float ballMinY = y - radius;
+        float ballMaxX = x + 2*radius;
+        float ballMaxY = y + radius;
         // Check if the ball moves over the bounds. If so, adjust the position and speed.
-        if (x < boxMaxX && x > boxMinX && y < boxMaxY && y> boxMinY) {
-            speedX = -speedX;
-            speedY = -speedY;// Reflect along normal
-                 // Re-position the ball at the edge
+        if (paddleNum == 1) {
+            if ((ballMinX < boxMaxX)&& (ballMinY > boxMinY) && (ballMinY < boxMaxY)) {
+                speedX = -speedX;
+                speedY = -speedY;// Reflect along normal
+                // Re-position the ball at the edge
+            }
         }
+        if ( paddleNum == 2){
+            if ((ballMaxX > boxMinX) && (ballMaxY > boxMinY) && (ballMinY < boxMaxY)) {
+                speedX = -speedX;
+                speedY = -speedY;// Reflect along normal
+                // Re-position the ball at the edge
+            }
+        }
+
     }
     //TODO need a collision detection for paddles
 

@@ -58,8 +58,11 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 
     public void gameUpdate() {
         ball.BackgroundCollisionDetection(background);
-        ball.PaddleCollisionDetection(p1);
-        ball.PaddleCollisionDetection(p2);
+        ball.PaddleCollisionDetection(p1, 1);
+        ball.PaddleCollisionDetection(p2, 2);
+        System.out.println(ball.x + " " + ball.y);
+        System.out.println(p1.maxX);
+        System.out.println(p2.minX);
     }
 
 
