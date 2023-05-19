@@ -22,8 +22,8 @@ public class Board extends JPanel implements ActionListener, KeyListener {
     public Board() {
 
         ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15);
-        p1 = new BoundBox(80, 350, 10, 100);
-        p2 = new BoundBox(800, 350, 10, 100);
+        p1 = new BoundBox(30, 350, 20, 100);
+        p2 = new BoundBox(CONSTANTS.WIDTH - 20-30, 350, 20, 100);
         background = new BoundBox(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT, Color.BLACK);
 
         artist = new Drawer();

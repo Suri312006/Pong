@@ -86,16 +86,18 @@ public class Ball {
         float ballMaxY = y + radius;
         // Check if the ball moves over the bounds. If so, adjust the position and speed.
         if (paddleNum == 1) {
-            if ((ballMinX < boxMaxX)&& (ballMinY > boxMinY) && (ballMinY < boxMaxY)) {
+            if ((ballMinX < boxMaxX)&& (ballMaxY > boxMinY) && (ballMinY < boxMaxY)) {
                 speedX = -speedX;
+                x = boxMaxX + radius*2 + 1;;
                 speedY = speedY;// Reflect along normal
                 // Re-position the ball at the edge
             }
         }
         if ( paddleNum == 2){
-            if ((ballMaxX > boxMinX) && (ballMaxY > boxMinY) && (ballMinY < boxMaxY)) {
+            if ((ballMaxX > boxMinX)&& (ballMaxY > boxMinY) && (ballMinY < boxMaxY)) {
                 speedX = -speedX;
-                speedY = -speedY;// Reflect along normal
+                x = boxMinX - radius*2 - 1;
+                speedY = speedY;// Reflect along normal
                 // Re-position the ball at the edge
             }
 
