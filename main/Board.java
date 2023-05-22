@@ -120,7 +120,6 @@ public class Board extends JPanel implements ActionListener, KeyListener {
             ball.draw(g2d);
         }
 
-        /** Called back to get the preferred size of the component. */
         @Override
         public Dimension getPreferredSize() {
             return (new Dimension(CONSTANTS.WIDTH, CONSTANTS.HEIGHT));
