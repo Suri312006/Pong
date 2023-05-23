@@ -8,7 +8,9 @@ import java.util.random.RandomGenerator;
 public class Ball {
     float x, y;
     float speedX, speedY;
-    float baseSpeed = 5;
+    float baseSpeed = 3;
+
+    float speedIncrement = 0.3F;
     float radius;
     private Color color;
     private static final Color DEFAULT_COLOR = Color.WHITE;
@@ -22,7 +24,7 @@ public class Ball {
         this.y = y;
         // Convert (speed, angle) to (x, y), with y-axis inverted
         this.speedX = (float)(speed * Math.cos(Math.toRadians(angleInDegree)));
-        this.speedY = (float)(-speed * (float)Math.sin(Math.toRadians(angleInDegree)));
+        this.speedY = (float)(-speed * Math.sin(Math.toRadians(angleInDegree)));
         this.radius = radius;
         this.color = color;
     }
@@ -70,7 +72,7 @@ public class Ball {
     public void PaddleCollisionDetection(BoundBox box, int paddleNum) {
         // Get the box's bounds, offset by the radius of the ball
         Random lol = new Random();
-        float randAngleMult = lol.nextFloat(160, 230);
+        float randAngleMult = lol.nextFloat(170, 200);
         float boxMinX = box.minX + radius;
         float boxMinY = box.minY + radius;
         float boxMaxX = box.maxX - radius;
@@ -83,24 +85,21 @@ public class Ball {
 
         // Check if the ball moves over the bounds. If so, adjust the position and speed.     
         if (paddleNum == 1) {
-            if ((ballMinX < boxMaxX)&& (ballMaxY > boxMinY) && (ballMinY < boxMaxY)) {
+            if ((ballMinX < boxMaxX)&& ((ballMaxY > boxMinY) && (ballMinY < boxMaxY))) {
                 //speedX = -speedX*randAngleMult;
-                this.speedX = baseSpeed+(float)(speedX * Math.cos(Math.toRadians(randAngleMult)));
+                this.speedX = baseSpeed+(float)(Math.cos(Math.toRadians(randAngleMult)));
                 x = boxMaxX + radius*2 + 1;;
-                this.speedY = baseSpeed+(float)(speedY * Math.sin(Math.toRadians(randAngleMult)));
-
-
-                //this.speedY = (float)(-speed * (float)Math.sin(Math.toRadians(angleInDegree)))
-
-                // Re-position the ball at the edge
+                this.speedY = -1*baseSpeed+(float)(Math.sin(Math.toRadians(randAngleMult)));
+                baseSpeed += speedIncrement;
             }
         }
         if ( paddleNum == 2){
-            if ((ballMaxX > boxMinX)&& (ballMaxY > boxMinY) && (ballMinY < boxMaxY)) {
+            if ((ballMaxX > boxMinX)&& ((ballMaxY > boxMinY) && (ballMinY < boxMaxY))) {
 
-              this.speedX = baseSpeed+(float)(speedX * Math.cos(Math.toRadians(randAngleMult)));
-              x = boxMaxX - radius*2 - 1;;
-              this.speedY = baseSpeed+(float)(-1*speedY * Math.sin(Math.toRadians(randAngleMult)));
+              this.speedX = -1*baseSpeed+(float)(Math.cos(Math.toRadians(randAngleMult)));
+              x = boxMinX - radius*2 - 1;;
+              this.speedY = baseSpeed+(float)Math.sin(Math.toRadians(randAngleMult));
+              baseSpeed += speedIncrement;     
             }
 
         }
