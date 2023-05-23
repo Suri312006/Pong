@@ -62,8 +62,6 @@ public class Board extends JPanel implements ActionListener, KeyListener {
         ball.PaddleCollisionDetection(p2, 2);
         p1.CelingFloorCollisionDetection(background);
         p2.CelingFloorCollisionDetection(background);
-        System.out.println(p1.minY);
-        System.out.println(p1.minX);
 
     }
 
@@ -118,6 +116,11 @@ public class Board extends JPanel implements ActionListener, KeyListener {
             p1.draw(g2d);
             p2.draw(g2d);
             ball.draw(g2d);
+
+            //draws stripes
+            for(int i = 0; i<19; i++){
+                g2d.fillRect(CONSTANTS.WIDTH/2 - 8, 25 + 40*i, 16, 25);
+            }
         }
 
         @Override
