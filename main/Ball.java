@@ -42,7 +42,7 @@ public class Ball {
         g.fillOval((int)(x - radius), (int)(y - radius), (int)(2 * radius), (int)(2 * radius));
     }
 
-    public void BackgroundCollisionDetection(BoundBox box) {
+    public void BackgroundCollisionDetection(BoundBox box, BoundBox p1, BoundBox p2) {
         // Get the ball's bounds, offset by the radius of the ball
         float ballMinX = box.minX + radius;
         float ballMinY = box.minY + radius;
@@ -55,10 +55,13 @@ public class Ball {
         // Check if the ball moves over the bounds. If so, adjust the position and speed.
         if (x < ballMinX) {
             speedX = -speedX; // Reflect along normal
-            x = ballMinX;     // Re-position the ball at the edge
+            x = ballMinX;
+            p2.sk.addPoint();
+            // Re-position the ball at the edge
         } else if (x > ballMaxX) {
             speedX = -speedX;
             x = ballMaxX;
+            p1.sk.addPoint();
         }
         // May cross both x and y bounds
         if (y < ballMinY) {
@@ -72,7 +75,7 @@ public class Ball {
     public void PaddleCollisionDetection(BoundBox box, int paddleNum) {
         // Get the box's bounds, offset by the radius of the ball
         Random lol = new Random();
-        float randAngleMult = lol.nextFloat(170, 200);
+        float randAngleMult = lol.nextFloat(179, 181);
         float boxMinX = box.minX + radius;
         float boxMinY = box.minY + radius;
         float boxMaxX = box.maxX - radius;
@@ -83,7 +86,7 @@ public class Ball {
         float ballMaxX = x + 2*radius;
         float ballMaxY = y + radius;
 
-        // Check if the ball moves over the bounds. If so, adjust the position and speed.     
+        // Check if  the ball moves over the bounds. If so, adjust the position and speed.
         if (paddleNum == 1) {
             if ((ballMinX < boxMaxX)&& ((ballMaxY > boxMinY) && (ballMinY < boxMaxY))) {
                 //speedX = -speedX*randAngleMult;

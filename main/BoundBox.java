@@ -4,12 +4,14 @@ import java.awt.*;
 /**
  * A rectangular container box, containing the bouncing ball.
  */
-public class BoundBox {
+public class BoundBox{
     int minX, maxX, minY, maxY;  // Box's bounds (package access)
     private Color colorFilled;   // Box's filled color (background)
     private static final Color DEFAULT_COLOR_FILLED = Color.WHITE;
 
     private static int yspeed = 20;
+
+   public Score sk= new Score();
 
     private int height;
 
@@ -23,6 +25,7 @@ public class BoundBox {
         maxY = y + height;
         this.height = height;
         this.colorFilled = colorFilled;
+
         ;
     }
 
