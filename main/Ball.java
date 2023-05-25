@@ -73,17 +73,17 @@ public class Ball {
         }
     }
     public void reset(){
-          Thread lol = new Thread(){
-              public void run() {
-                  x = CONSTANTS.WIDTH / 2 - radius;
-                  y = CONSTANTS.HEIGHT / 2 - radius;
-                  try {
-                      java.util.concurrent.TimeUnit.SECONDS.sleep(2);
-                  } catch (InterruptedException ex) {
-                  }
-              }
-          };
-          lol.start();
+
+
+           x = CONSTANTS.WIDTH / 2 - radius;
+           y = CONSTANTS.HEIGHT / 2 - radius;
+
+           int delay = 2000; // number of milliseconds to sleep
+
+                       long start = System.currentTimeMillis();
+                       while(start >= System.currentTimeMillis() - delay); // do nothing
+
+                       System.out.println("Time Slept: " + Long.toString(System.currentTimeMillis() - start)); //GOD BLESS AMERICAAA
     }
     public void PaddleCollisionDetection(BoundBox box, int paddleNum) {
         // Get the box's bounds, offset by the radius of the ball
