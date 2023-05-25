@@ -56,12 +56,12 @@ public class Ball {
         if (x < ballMinX) {
             speedX = -speedX; // Reflect along normal
             x = ballMinX;
-            p2.sk.addPoint();
+            p2.sk.addPoint(this);
             // Re-position the ball at the edge
         } else if (x > ballMaxX) {
             speedX = -speedX;
             x = ballMaxX;
-            p1.sk.addPoint();
+            p1.sk.addPoint(this);
         }
         // May cross both x and y bounds
         if (y < ballMinY) {
@@ -71,6 +71,19 @@ public class Ball {
             speedY = -speedY;
             y = ballMaxY;
         }
+    }
+    public void reset(){
+          Thread lol = new Thread(){
+              public void run() {
+                  x = CONSTANTS.WIDTH / 2 - radius;
+                  y = CONSTANTS.HEIGHT / 2 - radius;
+                  try {
+                      java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+                  } catch (InterruptedException ex) {
+                  }
+              }
+          };
+          lol.start();
     }
     public void PaddleCollisionDetection(BoundBox box, int paddleNum) {
         // Get the box's bounds, offset by the radius of the ball
