@@ -11,7 +11,7 @@ public class BoundBox{
 
     private static int yspeed = 20;
 
-   public Score sk= new Score();
+   public Score sk;
 
     private int height;
 
@@ -26,7 +26,17 @@ public class BoundBox{
         this.height = height;
         this.colorFilled = colorFilled;
 
-        ;
+
+    }
+    public BoundBox(int x, int y, int ScoreXpos, int ScoreYos, int width, int height) {
+        minX = x;
+        minY = y;
+        maxX = x + width;
+        maxY = y + height;
+        this.height = height;
+        this.colorFilled = DEFAULT_COLOR_FILLED;
+        sk = new Score(ScoreXpos, ScoreYos);
+
     }
 
     /**

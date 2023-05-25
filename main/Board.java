@@ -22,8 +22,8 @@ public class Board extends JPanel implements ActionListener, KeyListener {
     public Board() {
 
         ball = new Ball(CONSTANTS.WIDTH/2 - 15,CONSTANTS.HEIGHT/2 - 15);
-        p1 = new BoundBox(30, 350, 20, 100);
-        p2 = new BoundBox(CONSTANTS.WIDTH - 20-30, 350, 20, 100);
+        p1 = new BoundBox(30, 350,CONSTANTS.WIDTH/4, 50 ,20, 100);
+        p2 = new BoundBox(CONSTANTS.WIDTH - 20-30, 350,3*CONSTANTS.WIDTH/4, 50 ,20, 100);
         background = new BoundBox(0,0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT, Color.BLACK);
 
         artist = new Drawer();
@@ -118,6 +118,8 @@ public class Board extends JPanel implements ActionListener, KeyListener {
             p1.draw(g2d);
             p2.draw(g2d);
             ball.draw(g2d);
+            p1.sk.draw(g2d);
+            p2.sk.draw(g2d);
 
             //draws stripes
             for(int i = 0; i<19; i++){
