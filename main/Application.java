@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Application {
     private static void createAndShowGUI() {
-        JFrame frame = new JFrame("A World of Balls");
+        JFrame frame = new JFrame("PONG");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Board lmao = new Board();
         frame.setContentPane(lmao); // BallWorld is a JPanel

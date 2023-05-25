@@ -9,7 +9,7 @@ public class BoundBox{
     private Color colorFilled;   // Box's filled color (background)
     private static final Color DEFAULT_COLOR_FILLED = Color.WHITE;
 
-    private static int yspeed = 20;
+    private static int yspeed = 40;
 
    public Score sk;
 
